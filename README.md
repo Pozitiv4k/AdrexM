@@ -1,6 +1,7 @@
 # AdrexM
-Acesta este un proiect baza de date cu interfata web ce va avea ca scop functionalitatile indicate mai jos 
-Legenda: 
+Acesta este un proiect baza de date cu interfata web ce va avea ca scop functionalitatile indicate mai jos.
+
+# Legenda: 
   (+) - Deja realizat
   (+/-) - Partial realizat
   (-) - In curs de realizare 
