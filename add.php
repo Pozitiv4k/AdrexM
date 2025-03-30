@@ -1,4 +1,13 @@
 <?php
+include 'log_helper.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Procesul de adăugare a clientului (presupunând că ai un query SQL aici)
+    $numeClient = $_POST['login'];
+    
+    // Înregistrăm logul
+    adaugaLog('clienti', "A fost adăugat un nou client: $numeClient.");
+}
+
 include 'include/auth.php';
 include("include/nav.php");
 

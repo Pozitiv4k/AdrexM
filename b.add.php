@@ -1,13 +1,71 @@
 <?php
+include 'log_helper.php';
 include 'include/auth.php';
 include 'include/nav.php';
 include 'db.php'; // Include fișierul pentru conectarea la baza de date
 
-// Verifică dacă utilizatorul este autentificat
-if (!isset($_SESSION['id'])) {
-    header("Location: login.php"); // Redirect la pagina de logare dacă nu e autentificat
-    exit();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['transfer'])) {
+    $sourceUser = intval($_POST['source_user']);
+    $targetUser = intval($_POST['target_user']);
+    $itemId = intval($_POST['item_id']);
+    $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : null;
+    $type = $_POST['type'];
+
+    if ($sourceUser && $targetUser && $itemId && $type) {
+        if ($type === 'echipament') {
+            $query = "SELECT id, tip_echipament, numar_serie FROM echipamente WHERE id = ? AND user_id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("ii", $itemId, $sourceUser);
+            $stmt->execute();
+            $item = $stmt->get_result()->fetch_assoc();
+
+            if ($item) {
+                $updateQuery = "UPDATE echipamente SET user_id = ? WHERE id = ? AND user_id = ?";
+                $stmt = $conn->prepare($updateQuery);
+                $stmt->bind_param("iii", $targetUser, $itemId, $sourceUser);
+                $stmt->execute();
+                
+                adaugaLog('materiale', "Echipamentul ID={$itemId} (Tip={$item['tip_echipament']}, Nr. Serie={$item['numar_serie']}) a fost transferat de la utilizatorul {$sourceUser} către utilizatorul {$targetUser}.");
+            }
+        } else {
+            $table = $type === 'material' ? 'materiale' : ($type === 'cablu' ? 'cabluri' : 'instrumente');
+            $query = "SELECT cantitate, tip_{$type} FROM {$table} WHERE id = ? AND user_id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("ii", $itemId, $sourceUser);
+            $stmt->execute();
+            $item = $stmt->get_result()->fetch_assoc();
+
+            if ($item && $item['cantitate'] >= $quantity) {
+                $updateSource = "UPDATE {$table} SET cantitate = cantitate - ? WHERE id = ? AND user_id = ?";
+                $stmt = $conn->prepare($updateSource);
+                $stmt->bind_param("iii", $quantity, $itemId, $sourceUser);
+                $stmt->execute();
+                
+                $checkTarget = "SELECT id, cantitate FROM {$table} WHERE tip_{$type} = ? AND user_id = ?";
+                $stmt = $conn->prepare($checkTarget);
+                $stmt->bind_param("si", $item["tip_{$type}"], $targetUser);
+                $stmt->execute();
+                $targetItem = $stmt->get_result()->fetch_assoc();
+
+                if ($targetItem) {
+                    $updateTarget = "UPDATE {$table} SET cantitate = cantitate + ? WHERE id = ?";
+                    $stmt = $conn->prepare($updateTarget);
+                    $stmt->bind_param("ii", $quantity, $targetItem['id']);
+                } else {
+                    $insertTarget = "INSERT INTO {$table} (tip_{$type}, cantitate, user_id) VALUES (?, ?, ?)";
+                    $stmt = $conn->prepare($insertTarget);
+                    $stmt->bind_param("sii", $item["tip_{$type}"], $quantity, $targetUser);
+                }
+                $stmt->execute();
+                
+                adaugaLog('materiale', "Material ID={$itemId} (Tip={$item['tip_'.$type]}, Cantitate={$quantity}) a fost transferat de la utilizatorul {$sourceUser} către utilizatorul {$targetUser}.");
+            }
+        }
+    }
+    header("Location: {$_SERVER['PHP_SELF']}");
+    exit;
 }
+
 
 
 

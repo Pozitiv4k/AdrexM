@@ -1,6 +1,31 @@
 <?php
 include 'include/auth.php';
 include('include/nav.php');
+include 'log_helper.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $login = $_POST['login'];
+    $phone = $_POST['phone'];
+    $serial_number = $_POST['serial_number'];
+    $city = $_POST['city'];
+    $village = $_POST['village'];
+    $email = $_POST['email'];
+    $memento = $_POST['memento'];
+
+    // Obținem utilizatorul care efectuează modificarea
+    $user = isset($_SESSION['user']) ? $_SESSION['user'] : 'Unknown User';
+
+    // Înregistrăm logul cu utilizatorul care face modificarea
+    adaugaLog('clienti', "$user a modificat clientul Login=$login. Nume nou: $login.");
+    adaugaLog('clienti', "$user a modificat clientul Login=$login. Date de contacte noi: $phone.");
+    adaugaLog('clienti', "$user a modificat clientul Login=$login. SN nou: $serial_number.");
+    adaugaLog('clienti', "$user a modificat clientul Login=$login. Oras nou: $city.");
+    adaugaLog('clienti', "$user a modificat clientul Login=$login. Sat nou: $village.");
+    adaugaLog('clienti', "$user a modificat clientul Login=$login. Email nou: $email.");
+    adaugaLog('clienti', "$user a modificat clientul Login=$login. Memento nou: $memento.");
+}
+
+
 
 // Configurare conexiune baza de date
 $servername = "localhost";

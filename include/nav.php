@@ -30,7 +30,7 @@
                 </div>
                 ';
             }
-            
+            echo '<li class="nav-item"><a class="nav-link" href="logs.php">Logs</a></li>';
             echo '<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>';
         } else {
             echo '<li class="nav-item"><a class="nav-link" href="login.php">Autentificare</a></li>';

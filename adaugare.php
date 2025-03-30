@@ -1,4 +1,15 @@
 <?php
+include 'log_helper.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $numeMaterial = $_POST['material'];
+
+    // Procesul de adăugare în baza de date...
+
+    // Înregistrăm logul
+    adaugaLog('materiale', "A fost adăugat un nou material: $numeMaterial.");
+}
+
+
 include 'include/auth.php';
 include 'include/nav.php';
 include 'db.php';
