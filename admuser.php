@@ -1,14 +1,13 @@
 <?php
 include 'include/auth.php';
 include 'include/nav.php';
-include 'db.php';
+include 'log_helper.php'; // Adăugat pentru loguri
 
 if (basename($_SERVER['PHP_SELF']) == 'admin.php') {
     if (!(isset($_SESSION['is_superuser']) && $_SESSION['is_superuser'] == 1)) {
         showErrorAndRedirect("Nu aveți permisiuni pentru a accesa această pagină.", "index.php", 2);
     }
 }
-
 
 function addData($tableName, $fields, $values) {
     global $conn;
@@ -37,6 +36,7 @@ function updateSuperuserStatus($userId, $isSuperuser) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'];
+    $currentUser = $_SESSION['username'] ?? 'Necunoscut'; // Utilizatorul care face modificarea
 
     if ($action == 'add_user') {
         $username = $_POST['username'];
@@ -44,20 +44,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $is_superuser = isset($_POST['is_superuser']) ? 1 : 0;
         $fields = ['username', 'password', 'is_superuser', 'created_at'];
         $values = [$username, password_hash($password, PASSWORD_BCRYPT), $is_superuser, date('Y-m-d H:i:s')];
-        addData('users', $fields, $values);
+
+        if (addData('users', $fields, $values)) {
+            adaugaLog('utilizatori', "$currentUser a adăugat utilizatorul $username cu rol " . ($is_superuser ? "Administrator" : "User") . ".");
+        }
     } elseif ($action == 'delete_user') {
         $userId = $_POST['user_id'];
-        deleteUser($userId);
-    } elseif ($action == 'toggle_admin') {
-        $userId = $_POST['user_id'];
-        $isSuperuser = $_POST['is_superuser'];
 
+        // Obținem numele utilizatorului înainte de ștergere
         $stmt = $conn->prepare("SELECT username FROM users WHERE id = ?");
         $stmt->bind_param("i", $userId);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
-        if ($result['username'] !== 'superuser') {
-            updateSuperuserStatus($userId, $isSuperuser);
+        $deletedUsername = $result['username'] ?? 'Necunoscut';
+
+        if (deleteUser($userId)) {
+            adaugaLog('utilizatori', "$currentUser a șters utilizatorul $deletedUsername.");
+        }
+    } elseif ($action == 'toggle_admin') {
+        $userId = $_POST['user_id'];
+        $isSuperuser = $_POST['is_superuser'];
+
+        // Obținem numele utilizatorului
+        $stmt = $conn->prepare("SELECT username FROM users WHERE id = ?");
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        $targetUsername = $result['username'] ?? 'Necunoscut';
+
+        if ($targetUsername !== 'superuser' && updateSuperuserStatus($userId, $isSuperuser)) {
+            $actionText = $isSuperuser ? "a acordat drepturi de administrator" : "a revocat drepturile de administrator";
+            adaugaLog('utilizatori', "$currentUser $actionText pentru utilizatorul $targetUsername.");
         }
     }
 
@@ -68,6 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $search = $_GET['search'] ?? '';
 $users = $conn->query("SELECT * FROM users WHERE username LIKE '%$search%'")->fetch_all(MYSQLI_ASSOC);
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -12,19 +12,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $memento = $_POST['memento'];
 
-    // Obținem utilizatorul care efectuează modificarea
-    $user = isset($_SESSION['user']) ? $_SESSION['user'] : 'Unknown User';
+    // Obținem utilizatorul autentificat
+    $user = isset($_SESSION['username']) ? $_SESSION['username'] : 'Unknown User';
 
-    // Înregistrăm logul cu utilizatorul care face modificarea
-    adaugaLog('clienti', "$user a modificat clientul Login=$login. Nume nou: $login.");
-    adaugaLog('clienti', "$user a modificat clientul Login=$login. Date de contacte noi: $phone.");
-    adaugaLog('clienti', "$user a modificat clientul Login=$login. SN nou: $serial_number.");
-    adaugaLog('clienti', "$user a modificat clientul Login=$login. Oras nou: $city.");
-    adaugaLog('clienti', "$user a modificat clientul Login=$login. Sat nou: $village.");
-    adaugaLog('clienti', "$user a modificat clientul Login=$login. Email nou: $email.");
-    adaugaLog('clienti', "$user a modificat clientul Login=$login. Memento nou: $memento.");
+    // Înregistrăm modificările în log
+    adaugaLog('clienti', "$user a modificat clientul $login: Telefon: $phone, SN: $serial_number, Oras: $city, Sat: $village, Email: $email, Memento: $memento.");
 }
 
+// Configurare conexiune baza de date
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "examen";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = $_GET['id'];
+
+    // Obținerea datelor despre client
+    $stmt = $conn->prepare("SELECT * FROM clients WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $client = $result->fetch_assoc();
+    } else {
+        die("Client not found.");
+    }
+    $stmt->close();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $stmt = $conn->prepare("UPDATE clients SET login = ?, phone = ?, serial_number = ?, city = ?, village = ?, email = ?, memento = ? WHERE id = ?");
+        $stmt->bind_param("sssssssi", $login, $phone, $serial_number, $city, $village, $email, $memento, $id);
+
+        if ($stmt->execute()) {
+            echo "Client updated successfully!";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+        $stmt->close();
+    }
+} else {
+    die("Invalid client ID.");
+}
 
 
 // Configurare conexiune baza de date

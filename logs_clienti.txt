@@ -30,3 +30,7 @@
 [2025-03-30 18:12:14] Unknown User a modificat clientul Login=56543Der. Sat nou: .
 [2025-03-30 18:12:14] Unknown User a modificat clientul Login=56543Der. Email nou: 345@df.
 [2025-03-30 18:12:14] Unknown User a modificat clientul Login=56543Der. Memento nou: 4.
+[2025-03-30 18:28:21] superuser a modificat clientul Qwerty: Telefon: 2131234234, SN: xc433234, Oras: Leova, Sat: , Email: asdfgh2@fadf, Memento: `12.
+[2025-03-30 18:28:33] superuser a modificat clientul Qwerty: Telefon: 2131234234, SN: xc433234, Oras: Leova, Sat: , Email: asdfgh2@fadf, Memento: `12.
+[2025-03-30 18:30:19] superuser a modificat clientul Qwerty: Telefon: 2131234234, SN: xc433234, Oras: Leova, Sat: , Email: asdfgh2@fadf, Memento: `12.
+[2025-03-30 18:30:37] superuser a modificat clientul Qwertycrt: Telefon: 123456, SN: xXCdf, Oras: Leova, Sat: , Email: asdfgh2@fadf, Memento: `12.

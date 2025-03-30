@@ -2,7 +2,18 @@
 include 'log_helper.php';
 include 'include/auth.php';
 include 'include/nav.php';
-include 'db.php'; // Include fișierul pentru conectarea la baza de date
+
+
+// Funcția pentru a obține username-ul unui utilizator după ID
+function getUsernameById($userId) {
+    global $conn;
+    $query = "SELECT username FROM users WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    return $result['username'] ?? 'Necunoscut';
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['transfer'])) {
     $sourceUser = intval($_POST['source_user']);
@@ -10,6 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['transfer'])) {
     $itemId = intval($_POST['item_id']);
     $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : null;
     $type = $_POST['type'];
+
+    $sourceUsername = getUsernameById($sourceUser);
+    $targetUsername = getUsernameById($targetUser);
 
     if ($sourceUser && $targetUser && $itemId && $type) {
         if ($type === 'echipament') {
@@ -25,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['transfer'])) {
                 $stmt->bind_param("iii", $targetUser, $itemId, $sourceUser);
                 $stmt->execute();
                 
-                adaugaLog('materiale', "Echipamentul ID={$itemId} (Tip={$item['tip_echipament']}, Nr. Serie={$item['numar_serie']}) a fost transferat de la utilizatorul {$sourceUser} către utilizatorul {$targetUser}.");
+                adaugaLog('materiale', "Echipamentul ID={$itemId} (Tip={$item['tip_echipament']}, Nr. Serie={$item['numar_serie']}) a fost transferat de la {$sourceUsername} către {$targetUsername}.");
             }
         } else {
             $table = $type === 'material' ? 'materiale' : ($type === 'cablu' ? 'cabluri' : 'instrumente');
@@ -58,13 +72,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['transfer'])) {
                 }
                 $stmt->execute();
                 
-                adaugaLog('materiale', "Material ID={$itemId} (Tip={$item['tip_'.$type]}, Cantitate={$quantity}) a fost transferat de la utilizatorul {$sourceUser} către utilizatorul {$targetUser}.");
+                adaugaLog('materiale', "Material ID={$itemId} (Tip={$item['tip_'.$type]}, Cantitate={$quantity}) a fost transferat de la {$sourceUsername} către {$targetUsername}.");
             }
         }
     }
     header("Location: {$_SERVER['PHP_SELF']}");
     exit;
 }
+
 
 
 

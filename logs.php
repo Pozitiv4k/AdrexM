@@ -1,12 +1,36 @@
 <?php
 include("include/auth.php");
 include("include/nav.php");
+include("db.php"); // Include conexiunea la baza de date
+
 function citesteLoguri($categorie) {
-    $fisier = 'logs_' . $categorie . '.txt';
-    return file_exists($fisier) ? file($fisier) : [];
+    global $conn;
+
+    if (!$conn) {
+        die("Eroare: Conexiunea la baza de date nu este validă!");
+    }
+
+    $stmt = $conn->prepare("SELECT mesaj, created_at FROM logs WHERE categorie = ? ORDER BY created_at DESC");
+
+    if (!$stmt) {
+        die("Eroare SQL: " . $conn->error);
+    }
+
+    $stmt->bind_param("s", $categorie);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $loguri = [];
+    while ($row = $result->fetch_assoc()) {
+        $loguri[] = "[" . $row['created_at'] . "] " . $row['mesaj'];
+    }
+
+    $stmt->close();
+    return $loguri;
 }
 
-// Verificăm ce tip de loguri să afișăm
+
+// Verificăm categoria selectată
 $categorie = isset($_GET['categorie']) ? $_GET['categorie'] : 'clienti';
 $categorii_permise = ['clienti', 'materiale', 'utilizatori'];
 
@@ -34,8 +58,19 @@ $loguri = citesteLoguri($categorie);
         <a href="logs.php?categorie=materiale">Loguri Materiale</a> | 
         <a href="logs.php?categorie=utilizatori">Loguri Utilizatori</a>
     </div>
+    <form action="export_logs.php" method="GET">
+    <label for="duration">Selectează durata:</label>
+    <select name="duration" id="duration">
+        <option value="1day">Ultima zi</option>
+        <option value="1week">Ultima săptămână</option>
+        <option value="1month">Ultima lună</option>
+    </select>
+    <button type="submit">Exportă Loguri Excel</button>
+</form>
+
     <?php foreach ($loguri as $log): ?>
         <div class="log"><?php echo htmlspecialchars($log); ?></div>
     <?php endforeach; ?>
+    
 </body>
 </html>
