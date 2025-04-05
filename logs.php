@@ -65,7 +65,10 @@ $loguri = citesteLoguri($categorie);
         <option value="1week">Ultima săptămână</option>
         <option value="1month">Ultima lună</option>
     </select>
+    <input type="hidden" name="categorie" value="<?php echo htmlspecialchars($categorie); ?>">
     <button type="submit">Exportă Loguri Excel</button>
+</form>
+
 </form>
 
     <?php foreach ($loguri as $log): ?>

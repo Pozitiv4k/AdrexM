@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 include 'include/auth.php';
 include 'include/nav.php';
-include 'db.php';
 
 // Funcție pentru verificarea și adăugarea datelor în baza de date
 function addOrUpdateData($tableName, $fields, $values, $uniqueCheck = []) {

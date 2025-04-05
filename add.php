@@ -1,16 +1,23 @@
 <?php
-include 'log_helper.php';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Procesul de adăugare a clientului (presupunând că ai un query SQL aici)
-    $numeClient = $_POST['login'];
-    
-    // Înregistrăm logul
-    adaugaLog('clienti', "A fost adăugat un nou client: $numeClient.");
-}
-
 include 'include/auth.php';
-include("include/nav.php");
+include('include/nav.php');
+include 'log_helper.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $login = $_POST['login'];
+    $phone = $_POST['phone'];
+    $serial_number = $_POST['serial_number'];
+    $city = $_POST['city'];
+    $village = $_POST['village'];
+    $email = $_POST['email'];
+    $memento = $_POST['memento'];
+
+    // Obținem utilizatorul autentificat
+    $user = isset($_SESSION['username']) ? $_SESSION['username'] : 'Unknown User';
+
+    // Înregistrăm modificările în log
+    adaugaLog('clienti', "$user a adaugat clientul  cu datele: $login: Telefon: $phone, SN: $serial_number, Oras: $city, Sat: $village, Email: $email, Memento: $memento.");
+}
 
 ?>
 <!DOCTYPE html>
@@ -149,7 +156,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'], $_POST['phon
     }
     $stmt->close(); 
 }
-add_log($conn, $_SESSION['user_id'], "Adăugare client", "Client nou: $client_name");
+// Obținem utilizatorul autentificat
+
 
     $conn->close(); 
 ?>

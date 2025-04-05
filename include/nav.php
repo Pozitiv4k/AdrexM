@@ -14,8 +14,10 @@
         if (isset($_SESSION['username'])) {
             echo '<li class="nav-item"><a class="nav-link" href="schimbap.php">Schimba Parola</a></li>';
             echo '<li class="nav-item"><a class="nav-link" href="management.php">Depozit</a></li>';
+            echo '<li class="nav-item"><a class="nav-link" href="create_offer.php">Oferte</a></li>';
             if (isset($_SESSION['is_superuser']) && $_SESSION['is_superuser'] == 1) {
                 echo '
+                <li class="nav-item"><a class="nav-link" href="logs.php">Logs</a></li>
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Administrare
@@ -30,7 +32,6 @@
                 </div>
                 ';
             }
-            echo '<li class="nav-item"><a class="nav-link" href="logs.php">Logs</a></li>';
             echo '<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>';
         } else {
             echo '<li class="nav-item"><a class="nav-link" href="login.php">Autentificare</a></li>';

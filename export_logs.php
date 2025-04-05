@@ -1,48 +1,63 @@
 <?php
-require 'db.php'; // Conectarea la baza de date
-require 'vendor/autoload.php'; // Biblioteca PhpSpreadsheet
+require 'vendor/autoload.php';
+require 'db.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-// Obținem perioada selectată
-$duration = isset($_GET['duration']) ? $_GET['duration'] : 'day';
-$date_condition = '';
-
-switch ($duration) {
-    case 'week':
-        $date_condition = "log_time >= NOW() - INTERVAL 1 WEEK";
-        break;
-    case 'month':
-        $date_condition = "log_time >= NOW() - INTERVAL 1 MONTH";
-        break;
-    default:
-        $date_condition = "DATE(log_time) = CURDATE()";
+if (!$conn) {
+    die("Eroare: Conexiunea la baza de date nu este validă!");
 }
 
-$query = "SELECT id, user, action, log_time FROM logs WHERE $date_condition ORDER BY log_time DESC";
-$result = $conn->query($query);
+// Verificăm durata selectată
+$duration = $_GET['duration'] ?? '1day';
+$categorie = $_GET['categorie'] ?? 'clienti';
+$categorii_permise = ['clienti', 'materiale', 'utilizatori'];
 
+if (!in_array($categorie, $categorii_permise)) {
+    die("Eroare: Categorie invalidă!");
+}
+
+$date_condition = "";
+switch ($duration) {
+    case '1week':
+        $date_condition = "AND created_at >= NOW() - INTERVAL 7 DAY";
+        break;
+    case '1month':
+        $date_condition = "AND created_at >= NOW() - INTERVAL 1 MONTH";
+        break;
+    default:
+        $date_condition = "AND created_at >= NOW() - INTERVAL 1 DAY";
+}
+
+// Interogăm baza de date
+$sql = "SELECT mesaj, created_at FROM logs WHERE categorie = ? $date_condition ORDER BY created_at DESC";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $categorie);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Creăm fișierul Excel
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
-$sheet->setCellValue('A1', 'ID');
-$sheet->setCellValue('B1', 'User');
-$sheet->setCellValue('C1', 'Action');
-$sheet->setCellValue('D1', 'Timestamp');
 
-$row = 2;
+// Antet coloane
+$sheet->setCellValue('A1', 'Mesaj');
+$sheet->setCellValue('B1', 'Data');
+
+$row = 2; // Începem de la a doua linie
 while ($log = $result->fetch_assoc()) {
-    $sheet->setCellValue("A$row", $log['id']);
-    $sheet->setCellValue("B$row", $log['user']);
-    $sheet->setCellValue("C$row", $log['action']);
-    $sheet->setCellValue("D$row", $log['log_time']);
+    $sheet->setCellValue("A$row", $log['mesaj']);
+    $sheet->setCellValue("B$row", $log['created_at']);
     $row++;
 }
 
-$filename = "logs_" . date('Y-m-d') . ".xlsx";
+$stmt->close();
+
+// Generăm fișierul
+$filename = "logs_{$categorie}_{$duration}.xlsx";
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header("Content-Disposition: attachment; filename=$filename");
-header('Cache-Control: max-age=0');
+header('Content-Disposition: attachment; filename="' . $filename . '"');
 
 $writer = new Xlsx($spreadsheet);
 $writer->save('php://output');
