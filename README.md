@@ -1,6 +1,8 @@
 # AdrexM
 Acesta este un proiect baza de date cu interfata web ce va avea ca scop functionalitatile indicate mai jos.
 
+#Trebuie de adaugat: Trebuie de adaugat pagina creaza oferta/editare oferta 
+
 # Legenda: 
   (+) - Deja realizat
   (+/-) - Partial realizat
