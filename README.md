@@ -9,10 +9,10 @@ Acesta este un proiect baza de date cu interfata web ce va avea ca scop function
   (-) - In curs de realizare 
 
 # Trebuie de adaugat/modificat: 
-Trebuie de adaugat: pagina creaza oferta/editare oferta 
-Trebuie de modificat: Depozit de adaugat sectiunea imagini +descriere 
-Trebuie de modificat: La crearea ofertei se v-a alege client catre care se face oferta ,apoi ea se va salva ca atasare la document al user dat
-Trebuie de modificat: Creare pagina de montare a echipamentelor pe user ,Model echipament si SN va fi scris pe client si sters de pe user care va selecta din dropdown list, tot la pagina data vor fi casate si materialele folosite aratand un pret final pentru materialele montate
+Trebuie de adaugat: pagina creaza oferta/editare oferta +
+Trebuie de modificat: Depozit de adaugat sectiunea imagini +descriere +
+Trebuie de modificat: La crearea ofertei se v-a alege client catre care se face oferta ,apoi ea se va salva ca atasare la document al user dat-
+Trebuie de modificat: Creare pagina de montare a echipamentelor pe user ,Model echipament si SN va fi scris pe client si sters de pe user care va selecta din dropdown list, tot la pagina data vor fi casate si materialele folosite aratand un pret final pentru materialele montate-
 # 1. Cerințe generale:
 Aplicația va permite gestionarea echipamentelor/materialelor între depozite și transferul acestora către clienți sau persoane desemnate. (+)
 Gestionarea și urmărirea echipamentelor va include detalii precum număr de serie, MAC, locație, configurație, etc. (+)
