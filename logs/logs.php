@@ -45,6 +45,8 @@ $loguri = citesteLoguri($categorie);
 <head>
     <meta charset="UTF-8">
     <title>Loguri</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styl.css" rel="stylesheet">
     <style>
         body { font-family: Arial, sans-serif; }
         .log { padding: 5px; border-bottom: 1px solid #ccc; }

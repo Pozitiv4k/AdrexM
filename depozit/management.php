@@ -61,7 +61,7 @@ if ($viewType === 'echipamente') {
     <title>Depozit - Selectare Tip</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
+    
     <link href="css/style.css" rel="stylesheet">
     <style>
         table th, table td {

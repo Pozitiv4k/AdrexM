@@ -189,7 +189,7 @@ $users = $conn->query("SELECT id, username FROM users");
     <title>Transfer Materiale</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
+    
     <link href="../css/style.css" rel="stylesheet">
     <script>
         function updateForm() {

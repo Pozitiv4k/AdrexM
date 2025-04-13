@@ -1,5 +1,6 @@
 <?php
-include("db/dbF.php"); // Conectare la baza de date
+include("include/auth.php");
+include("db/dbF.php");
 include("include/nav.php"); // Navigare header
 
 // Adăugare membru echipă
@@ -142,8 +143,8 @@ $carousel_result = $conn->query("SELECT * FROM carousel");
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Admin Page" name="keywords">
     <meta content="Admin Page" name="description">
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styl.css" rel="stylesheet">
     <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
 </head>
 

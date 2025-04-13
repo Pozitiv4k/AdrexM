@@ -4,9 +4,8 @@ include("../include/nav.php");
 include("../db/db.php");
 ?>
 <!DOCTYPE html>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-
-<link href="css/style.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
@@ -28,7 +27,7 @@ include("../db/db.php");
 
 <h2>Creare Ofertă</h2>
 
-<form action="depozit/export_offer.php" method="POST" enctype="multipart/form-data" id="offerForm">
+<form action="export_offer.php" method="POST" enctype="multipart/form-data" id="offerForm">
     <table id="offerTable">
         <thead>
             <tr>

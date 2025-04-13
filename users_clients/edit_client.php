@@ -109,7 +109,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
         // Dacă un fișier nou este încărcat, îl salvăm
         if (!empty($_FILES['new_config_file']['name'])) {
-            $targetDir = "uploads/";
+            $targetDir = "../depozit/uploads/";
             $newFileName = time() . "_" . basename($_FILES['new_config_file']['name']);
             $newFilePath = $targetDir . $newFileName;
 
@@ -153,8 +153,9 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Client</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styl.css" rel="stylesheet">
 
-<!-- Template Stylesheet -->
+
 <link href="../css/style.css" rel="stylesheet">
     <script>
         function updateVillageOptions() {

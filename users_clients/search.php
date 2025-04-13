@@ -9,7 +9,8 @@ include("../include/nav.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Client</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styl.css" rel="stylesheet">
     <script>
         // Script pentru a afișa/ascunde câmpuri în funcție de criteriul selectat
         function updateSearchForm() {
@@ -32,7 +33,7 @@ include("../include/nav.php");
         <h1>Search Client</h1>
     </header>
     <main>
-        <form action="clients/users/search.php" method="POST">
+        <form action="search.php" method="POST">
             <label for="criteria">Search by:</label>
             <select id="criteria" name="criteria" required onchange="updateSearchForm()">
                 <option value="id">ID</option>

@@ -95,10 +95,10 @@ $users = $conn->query("SELECT * FROM users WHERE username LIKE '%$search%'")->fe
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrație - Gestionare Utilizatori</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+   
 
-<!-- Template Stylesheet -->
-<link href="css/style.css" rel="stylesheet">
+
 </head>
 <body>
 

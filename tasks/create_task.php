@@ -18,10 +18,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 ?>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Template Stylesheet -->
-<link href="../css/styles.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styl.css" rel="stylesheet">
+<title>Document</title>
+</head>
+<body>
+    
 <h2>Creare Task</h2>
 <form method="POST">
     <label>Tip task:</label>
@@ -47,3 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <button type="submit">Înregistrează Task</button>
 </form>
+</body>
+</html>
+
+ 

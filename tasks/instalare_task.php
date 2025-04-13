@@ -21,8 +21,17 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 ?>
-
-<h2>Taskuri asignate</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+<title>Document</title>
+</head>
+<body>
+    <h2>Taskuri asignate</h2>
 
 <table>
     <tr>
@@ -42,3 +51,6 @@ $result = $stmt->get_result();
         </tr>
     <?php endwhile; ?>
 </table>
+</body>
+</html>
+

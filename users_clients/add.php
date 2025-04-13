@@ -26,10 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Client</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styl.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link href="../css/styles.css" rel="stylesheet">
+
+    
     <script>
         function updateVillageOptions() {
             const city = document.getElementById('city').value;
