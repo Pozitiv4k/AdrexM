@@ -54,9 +54,21 @@ include_once __DIR__ . '/../configs/config.php';
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light adrex-navbar">
-    <a class="navbar-brand" href="<?php echo BASE_URL; ?>admin.php">
-        <h1>Adrex<span>Cam</span></h1>
-    </a>
+<a class="navbar-brand" href="<?php 
+    if (isset($_SESSION['username'])) {
+        echo BASE_URL . 'admin.php';  // Daca este logat, linkul duce la admin.php
+    } else {
+        echo '#';  // Daca nu este logat, nu duce nicăieri
+    }
+?>">
+    <h1>Adrex<span>Cam</span></h1>
+</a>
+
+<?php
+if (!isset($_SESSION['username'])) {  // Verificăm dacă utilizatorul nu este logat
+    echo '<script>alert("Nu esti logat! Te rugam sa te autentifici pentru a accesa pagina.");</script>';
+}
+?>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,6 +109,7 @@ include_once __DIR__ . '/../configs/config.php';
                 echo '<li class="nav-item"><a class="nav-link" href="' . BASE_URL . 'logout.php">Logout</a></li>';
             } else {
                 echo '<li class="nav-item"><a class="nav-link" href="' . BASE_URL . 'login.php">Autentificare</a></li>';
+                echo '<li class="nav-item"><a class="nav-link" href="' . BASE_URL . 'index.php">Pagina Principală</a></li>';
             }
             ?>
         </ul>
