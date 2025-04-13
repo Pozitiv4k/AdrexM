@@ -19,7 +19,7 @@ function logoutUser() {
 
 // Verificăm dacă utilizatorul încearcă să acceseze `login.php` fiind deja logat
 if (basename($_SERVER['PHP_SELF']) == 'login.php' && isset($_SESSION['username'])) {
-    showErrorAndRedirect("Un utilizator este deja logat: " . htmlspecialchars($_SESSION['username']), "index.php");
+    showErrorAndRedirect("Un utilizator este deja logat: " . htmlspecialchars($_SESSION['username']), "admin.php");
 }
 
 // Verificăm dacă utilizatorul este autentificat pentru paginile protejate
@@ -39,13 +39,13 @@ function checkPermissions($page) {
 
 
 // Verificăm permisiunile pentru paginile cu acces restricționat
-checkPermissions('adaugare.php');
-checkPermissions('admuser.php');
-checkPermissions('add.php');
-checkPermissions('search.php');
+checkPermissions('depozit/adaugare.php');
+checkPermissions('clients/users/admuser.php');
+checkPermissions('clients/users/add.php');
+checkPermissions('clients/users/search.php');
 
 // Securizare redirecționare edit_client.php?id=1, edit_client.php?id=2 etc.
-if (basename($_SERVER['PHP_SELF']) == 'edit_client.php' && isset($_GET['id'])) {
+if (basename($_SERVER['PHP_SELF']) == 'clients/users/edit_client.php' && isset($_GET['id'])) {
     // Verificăm dacă utilizatorul are permisiuni pentru a edita clientul cu ID-ul respectiv
     // Se poate folosi o logică bazată pe datele specifice clientului pentru a verifica accesul
     // De exemplu, doar superuserii pot edita un client

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="chat.css">
+<link rel="stylesheet" href="../css/chat.css">
     
 <input type="checkbox" id="click">
 <label for="click">

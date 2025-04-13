@@ -1,5 +1,5 @@
 <?php
-require('db.php');
+require("db/db.php");
 include("include/auth.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['id'] = $row['id']; // Adăugăm id-ul utilizatorului în sesiune
             $_SESSION['username'] = $username;
             $_SESSION['is_superuser'] = $row['is_superuser'];
-            header("location: index.php");
+            header("location: admin.php");
             exit();
         } else {
             $error = "Nume de utilizator sau parolă incorecte.";
@@ -50,7 +50,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Template Stylesheet -->
+<link href="css/style.css" rel="stylesheet">
     <title>Autentificare</title>
 </head>
 <body>
@@ -72,7 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<div class='alert alert-danger mt-3'>$error</div>";
         }
         ?>
-        <p class="mt-3">Esti nou? <a href="register.php">Inregistreaza-te aici</a>.</p>
     </div>
 </body>
 </html>

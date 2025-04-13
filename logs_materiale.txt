@@ -1,8 +1,0 @@
-[2025-03-30 17:40:35] Materialul ID= a fost transferat către .
-[2025-03-30 17:40:43] Materialul ID= a fost transferat către .
-[2025-03-30 17:40:49] Materialul ID= a fost transferat către .
-[2025-03-30 18:08:30] Material ID=1 (Tip=Conector | Ethernet | RJ-11, Cantitate=1) a fost transferat de la utilizatorul 1 către utilizatorul 2.
-[2025-03-30 18:08:38] Material ID=1 (Tip=Conector | Ethernet | RJ-11, Cantitate=1) a fost transferat de la utilizatorul 1 către utilizatorul 5.
-[2025-03-30 18:32:33] Material ID=2 (Tip=Cablu | Ethernet | Cat5 | UTP 4x2, Cantitate=234) a fost transferat de la utilizatorul 1 către utilizatorul 4.
-[2025-03-30 18:34:55] Material ID=1 (Tip=Conector | Ethernet | RJ-11, Cantitate=1) a fost transferat de la superuser către admin.
-[2025-03-30 18:35:03] Material ID=1 (Tip=Conector | Ethernet | RJ-11, Cantitate=1) a fost transferat de la superuser către angajat.
