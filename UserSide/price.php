@@ -1,5 +1,5 @@
 <?php
-session_start();
+include ("../include/init.php");
 include("../include/nav_user.php");
 include("../db/dbF.php"); // fișier cu conexiunea la DB
 ?>

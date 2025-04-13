@@ -1,5 +1,5 @@
 <?php
-session_start();
+include ("../include/init.php");
 include("../include/nav_user.php");
 ?>
 

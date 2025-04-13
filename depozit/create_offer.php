@@ -10,6 +10,7 @@ include("../db/db.php");
 <head>
     <meta charset="UTF-8">
     <title>Creare Ofertă Dinamică</title>
+    <link href="../css/s.css" rel="stylesheet">
     <style>
         body { font-family: Calibri, sans-serif; padding: 30px; }
         table { width: 100%; border-collapse: collapse; margin-top: 30px; }
@@ -24,9 +25,8 @@ include("../db/db.php");
     
 </head>
 <body>
-
-<h2>Creare Ofertă</h2>
-
+<div class="main-page-content">
+<h2 class="text-center mb-5">Creare Ofertă</h2>
 <form action="export_offer.php" method="POST" enctype="multipart/form-data" id="offerForm">
     <table id="offerTable">
         <thead>
@@ -60,7 +60,7 @@ include("../db/db.php");
     <button type="submit" name="export" value="excel">Generează Ofertă Excel</button>
     <button type="submit" name="export" value="pdf">Generează Ofertă PDF</button>
 </form>
-
+</div>
 <script>
 let index = 1;
 

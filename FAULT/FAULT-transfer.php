@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'db.php'; // Include fișierul pentru conectarea la baza de date
 
 // Functie pentru a manipula elementele din liste (eliminare/reactivare)

@@ -1,6 +1,5 @@
 <?php
-session_start();
-
+include ("init.php");
 // Funcție pentru afișarea unui mesaj de eroare și redirecționare
 function showErrorAndRedirect($message, $redirectUrl, $seconds = 2) {
     echo "<p style='color: red; text-align: center;'>$message</p>";

@@ -1,7 +1,7 @@
 <?php
 include '../logs/log_helper.php';
 include '../include/auth.php';
-include '../include/nav.php';
+
 require_once '../db/db.php';
 
 // Funcție pentru verificare și adăugare/update
@@ -122,15 +122,12 @@ $users = getUsers();
 <head>
     <meta charset="UTF-8">
     <title>Adăugare Date</title>
-    
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-
-    
-    <link href="../css/style.css" rel="stylesheet">
+     <?php include '../include/nav.php';?>
+    <link href="../css/s.css" rel="stylesheet">
 </head>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container mt-5 main-page-content">
     <h2>Adăugare Date</h2>
 
     <?php if (isset($_SESSION['successMessage'])): ?>

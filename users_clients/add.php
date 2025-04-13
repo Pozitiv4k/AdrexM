@@ -26,8 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Client</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/styl.css" rel="stylesheet">
+    <link href="../css/s.css" rel="stylesheet">
 
 
     
@@ -59,11 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
 </head>
 <body>
+    <div class="main-page-content">
     <header>
         <h1>Add New Client</h1>
     </header>
     <main>
-        <form action="clients/users/add.php" method="POST" enctype="multipart/form-data">
+        <form action="add.php" method="POST" enctype="multipart/form-data">
             <label for="login">Login:</label>
             <input type="text" id="login" name="login" required>
 
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </select>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="text" type="email" id="email" name="email" required>
 
             <label for="config-file">Upload Configuration File:</label>
             <input type="file" id="config-file" name="config_file">
@@ -98,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Add Client</button>
         </form>
     </main>
+</div>
 </body>
 </html>
 <?php

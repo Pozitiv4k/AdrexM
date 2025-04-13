@@ -1,6 +1,5 @@
 <?php
 include '../include/auth.php';
-include '../include/nav.php';
 
 $conn = new mysqli("localhost", "root", "", "examen");
 if ($conn->connect_error) {
@@ -26,11 +25,13 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/s.css" rel="stylesheet">
+    <?php include '../include/nav.php';
+?>
 <title>Document</title>
 </head>
 <body>
+    <div class="main-page-content">
     <h2>Taskuri asignate</h2>
 
 <table>
@@ -51,6 +52,7 @@ $result = $stmt->get_result();
         </tr>
     <?php endwhile; ?>
 </table>
+</div>
 </body>
 </html>
 

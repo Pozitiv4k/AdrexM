@@ -29,37 +29,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/s.css">
     <title>Schimbă Parola</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .container {
-            flex: 1;
-        }
-        .footer {
-            background-color: #f8f9fa;
-            padding: 20px 0;
-            text-align: center;
-        }
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .logo-container img {
-            width: 50px;
-            height: auto;
-            background: none;
-        }
-    </style>
+    
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h2>Schimbă Parola</h2>
+    <div class="main-page-content">
+    <div class="container mt-5 ">
+        <h2 class="text-center mb-5"> Schimbă Parola</h2>
         <form action="" method="post">
             <div class="form-group">
                 <label for="newPassword">Noua Parolă:</label>
@@ -81,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
     </div>
 
-    
+</div>    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </body>
 </html>

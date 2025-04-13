@@ -143,14 +143,26 @@ $carousel_result = $conn->query("SELECT * FROM carousel");
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Admin Page" name="keywords">
     <meta content="Admin Page" name="description">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styl.css" rel="stylesheet">
+    <link href="css/s.css" rel="stylesheet">
     <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <style>
+        h1,h2{
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+        .main-page-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content:center;   
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="container-fluid">
+    <div class="container-fluid main-page-content">
         <h1 class="my-4">Admin Dashboard</h1>
 
         <!-- Adăugare membru echipă -->

@@ -45,8 +45,7 @@ $loguri = citesteLoguri($categorie);
 <head>
     <meta charset="UTF-8">
     <title>Loguri</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/styl.css" rel="stylesheet">
+    <link href="../css/s.css" rel="stylesheet">
     <style>
         body { font-family: Arial, sans-serif; }
         .log { padding: 5px; border-bottom: 1px solid #ccc; }
@@ -54,13 +53,14 @@ $loguri = citesteLoguri($categorie);
     </style>
 </head>
 <body>
-    <h1>Loguri <?php echo ucfirst($categorie); ?></h1>
-    <div class="filter">
+    <div class="main-page-content">
+    <h1 class="text-center mb-5">Loguri <?php echo ucfirst($categorie); ?></h1>
+    <div class="filter text-center mb-5">
         <a href="logs.php?categorie=clienti">Loguri Clienți</a> | 
         <a href="logs.php?categorie=materiale">Loguri Materiale</a> | 
         <a href="logs.php?categorie=utilizatori">Loguri Utilizatori</a>
     </div>
-    <form action="logs/export_logs.php" method="GET">
+    <form action="export_logs.php" method="GET">
     <label for="duration">Selectează durata:</label>
     <select name="duration" id="duration">
         <option value="1day">Ultima zi</option>
@@ -76,6 +76,6 @@ $loguri = citesteLoguri($categorie);
     <?php foreach ($loguri as $log): ?>
         <div class="log"><?php echo htmlspecialchars($log); ?></div>
     <?php endforeach; ?>
-    
+ </div>   
 </body>
 </html>

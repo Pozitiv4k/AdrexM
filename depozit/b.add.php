@@ -1,7 +1,7 @@
 <?php
-include '../logs/log_helper.php';
 include '../include/auth.php';
-include '../include/nav.php';
+include '../logs/log_helper.php';
+
 
 
 // Funcția pentru a obține username-ul unui utilizator după ID
@@ -187,10 +187,11 @@ $users = $conn->query("SELECT id, username FROM users");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transfer Materiale</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-
-    
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/s.css" rel="stylesheet">
+<?php 
+include '../include/nav.php';
+?>
+   
     <script>
         function updateForm() {
             const userId = document.getElementById("source_user").value;
@@ -205,7 +206,7 @@ $users = $conn->query("SELECT id, username FROM users");
             }
 
             if (userId && type) {
-                fetch(`fetch_data.php?user_id=${userId}&type=${type}`)
+                fetch(`../configs/fetch_data.php?user_id=${userId}&type=${type}`)
                     .then(response => response.json())
                     .then(data => {
                         const select = document.getElementById("item_id");
@@ -226,6 +227,8 @@ $users = $conn->query("SELECT id, username FROM users");
     </script>
 </head>
 <body>
+<div class="main-page-content"> 
+    
 <div class="container mt-5">
     <h1 class="text-center">Transfer Materiale</h1>
     <?php if (!empty($_SESSION['success_message'])): ?>
@@ -284,6 +287,7 @@ $users = $conn->query("SELECT id, username FROM users");
         </div>
         <button type="submit" name="transfer" class="btn btn-primary">Transferă</button>
     </form>
+</div>
 </div>
 </body>
 </html>

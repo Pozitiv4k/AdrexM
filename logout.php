@@ -1,5 +1,5 @@
 <?php
-session_start();
+include ("include/init.php");
 
 // Ștergem toate datele din sesiune și deconectăm utilizatorul
 include 'logs/log_manager.php';

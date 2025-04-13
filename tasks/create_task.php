@@ -1,6 +1,5 @@
 <?php
 include '../include/auth.php';
-include '../include/nav.php';
 
 $conn = new mysqli("localhost", "root", "", "examen");
 $clienti = $conn->query("SELECT id, login FROM clients");
@@ -14,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $conn->prepare("INSERT INTO tasks (tip, descriere, adresa, client_id) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("sssi", $tip, $descriere, $adresa, $client_id);
     $stmt->execute();
-    header("Location: tasks/tasks.php");
+    header("Location: tasks.php");
     exit();
 }
 ?>
@@ -23,13 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/styl.css" rel="stylesheet">
+    <link href="../css/s.css" rel="stylesheet">
+    <?php include '../include/nav.php';
+?>
 <title>Document</title>
 </head>
 <body>
-    
-<h2>Creare Task</h2>
+    <div class="main-page-content">
+<h2 class="text-center mb-5">Creare Task</h2>
 <form method="POST">
     <label>Tip task:</label>
     <select name="tip">
@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <button type="submit">Înregistrează Task</button>
 </form>
+</div>
 </body>
 </html>
 

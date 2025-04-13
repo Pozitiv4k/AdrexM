@@ -52,7 +52,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $stmt->bind_param("sssssssi", $login, $phone, $numar_serie, $city, $village, $email, $memento, $id);
 
         if ($stmt->execute()) {
-            echo "Client updated successfully!";
+            
         } else {
             echo "Error: " . $stmt->error;
         }
@@ -131,7 +131,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $stmt->bind_param("ssssssssi", $login, $phone, $numar_serie, $city, $village, $email, $configFilePath, $memento, $id);
 
         if ($stmt->execute()) {
-            echo "Client updated successfully!";
+            
         } else {
             echo "Error: " . $stmt->error;
         }
@@ -152,11 +152,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Client</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/styl.css" rel="stylesheet">
-
-
-<link href="../css/style.css" rel="stylesheet">
+    <link href="../css/s.css" rel="stylesheet">
     <script>
         function updateVillageOptions() {
             const city = document.getElementById('city').value;
@@ -185,6 +181,7 @@ $conn->close();
     </script>
 </head>
 <body>
+    <div class="main-page-content">
     <header>
         <h1>Edit Client</h1>
     </header>
@@ -233,5 +230,6 @@ $conn->close();
             <button type="submit">Save Changes</button>
         </form>
     </main>
+</div>
 </body>
 </html>

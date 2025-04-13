@@ -59,10 +59,10 @@ if ($viewType === 'echipamente') {
 <head>
     <meta charset="UTF-8">
     <title>Depozit - Selectare Tip</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    
 
     
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/s.css" rel="stylesheet">
     <style>
         table th, table td {
             vertical-align: middle !important;
@@ -72,11 +72,16 @@ if ($viewType === 'echipamente') {
             max-width: 80px;
             max-height: 80px;
         }
+        .view {
+   
+    padding: 1px 12px !important;
+    
+}
     </style>
 </head>
 <body>
-
-<div class="container py-5">
+<div class="main-page-content">
+<div class="container py-5 ">
     <h2 class="text-center mb-5">Depozit - Selectare Tip</h2>
 
     <!-- Dropdown principal -->
@@ -204,6 +209,6 @@ if ($viewType === 'echipamente') {
         <?php endif; ?>
     <?php endif; ?>
 </div>
-
+</div>
 </body>
 </html>

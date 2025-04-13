@@ -55,8 +55,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_transmitere'])
     exit;
 }
 ?>
-
-<h2>Transmitere Task</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/s.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main-page-content">
+   <h2>Transmitere Task</h2>
 <p><strong>Client:</strong> <?= htmlspecialchars($task['client_login']) ?></p>
 <p><strong>Tip Task:</strong> <?= htmlspecialchars($task['tip']) ?></p>
 <p><strong>Descriere:</strong> <?= htmlspecialchars($task['descriere']) ?></p>
@@ -78,3 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_transmitere'])
 
     <button type="submit" name="submit_transmitere">Transmite Task</button>
 </form>
+</div>
+</body>
+</html>
+

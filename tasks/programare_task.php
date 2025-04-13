@@ -68,8 +68,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_programare']))
     exit;
 }
 ?>
-
-<h2>Programare Task</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/s.css">
+    <title>Programare</title>
+</head>
+<body>
+    <div class="main-page-contenr">
+    <h2>Programare Task</h2>
 <p><strong>Client:</strong> <?= htmlspecialchars($task['client_login']) ?></p>
 <p><strong>Tip Task:</strong> <?= htmlspecialchars($task['tip']) ?></p>
 <p><strong>Descriere:</strong> <?= htmlspecialchars($task['descriere']) ?></p>
@@ -91,4 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_programare']))
     <input type="date" name="data_programata" value="<?= $task['data_programata'] ?>"><br><br>
 
     <button type="submit" name="submit_programare">Programează Task</button>
+</div>
 </form>
+</body>
+</html>
+

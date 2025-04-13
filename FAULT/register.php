@@ -1,6 +1,5 @@
 <?php
 require("db.php");
-session_start();
 // După ce se inserează utilizatorul în baza de date
 
 
