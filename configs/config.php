@@ -1,3 +1,3 @@
 <?php
-define('BASE_URL', '/adrexo/');
+define('BASE_URL', '/adrexm/');
 ?>
