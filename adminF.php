@@ -144,6 +144,7 @@ $carousel_result = $conn->query("SELECT * FROM carousel");
     <meta content="Admin Page" name="keywords">
     <meta content="Admin Page" name="description">
     <link href="css/s.css" rel="stylesheet">
+    <link href="css/nav.css" rel="stylesheet">
     <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
     <style>
         h1,h2{
@@ -209,24 +210,6 @@ $carousel_result = $conn->query("SELECT * FROM carousel");
             </form>
         </div>
 
-        <!-- Adăugare secțiune About -->
-        <div class="my-4">
-            <h2>Adăugare secțiune About</h2>
-            <form action="" method="POST">
-                <input type="text" name="titlu" placeholder="Titlu" required>
-                <textarea name="descriere" placeholder="Descriere" required></textarea>
-                <button type="submit" name="add_about">Adaugă</button>
-            </form>
-        </div>
-
-        <!-- Carousel -->
-        <div class="my-4">
-            <h2>Adăugare imagine în Carousel</h2>
-            <form action="" method="POST" enctype="multipart/form-data">
-                <input type="file" name="imagine_carousel" required>
-                <button type="submit" name="add_carousel">Adaugă imagine</button>
-            </form>
-        </div>
 
         <!-- Lista echipei -->
         <div class="my-4">
@@ -291,48 +274,7 @@ $carousel_result = $conn->query("SELECT * FROM carousel");
             </table>
         </div>
 
-        <!-- Secțiunea About -->
-        <div class="my-4">
-            <h2>Secțiune About</h2>
-            <table class="table">
-                <tr>
-                    <th>Titlu</th>
-                    <th>Descriere</th>
-                    <th>Subtitlu</th>
-                    <th>Extra text</th>
-                    <th>Imagine</th>
-                </tr>
-                <?php while ($row = $about_result->fetch_assoc()) { ?>
-                    <tr>
-                        <td><img src="uploads/<?= $row['imagine'] ?>" width="50" alt="imagine"></td> 
-                        <td><?= $row['title'] ?></td>
-                        <td><?= $row['description'] ?></td>
-                        <td><?= $row['subtitle'] ?></td>
-                        <td><?= $row['extra_text'] ?></td>
-                        <td><a href="?delete_about=<?= $row['id'] ?>">Șterge</a></td>
-                    </tr>
-                <?php } ?>
-            </table>
-        </div>
-
-        <!-- Carousel Images -->
-        <div class="my-4">
-            <h2>Imagini din Carousel</h2>
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <?php $active = 'active'; ?>
-                    <?php while ($row = $carousel_result->fetch_assoc()) { ?>
-                        <div class="carousel-item <?= $active ?>">
-                            <img src="uploads/carousel/<?= $row['imagine'] ?>" class="d-block w-100" alt="...">
-                        </div>
-                        <?php $active = ''; ?>
-                    <?php } ?>
-                    <td><a href="?delete_carousel=<?= $row['id'] ?>">Șterge</a></td>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

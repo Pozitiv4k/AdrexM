@@ -64,7 +64,7 @@ include("../db/dbF.php"); // fișier cu conexiunea la baza de date
     </div>
 
     <!-- Footer + JS -->
-    <?php include("../include/feedback.php");
+    <?php
     include("../include/footer.php"); ?>
     <script src="js/main.js"></script>
 </body>

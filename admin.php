@@ -19,6 +19,6 @@ include("include/nav.php");
         const userId = <?php echo isset($_SESSION['id']) ? json_encode($_SESSION['id']) : 'null'; ?>;
         console.log('User ID:', userId); // Verificăm user ID-ul
     </script>
-  
+  sty
 </body>
 </html>

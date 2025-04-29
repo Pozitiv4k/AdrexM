@@ -1,121 +1,6 @@
 <?php include_once __DIR__ . '/../configs/config.php'; ?>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-<style>
-/* Stil general pentru pagină */
-body {
-    margin: 0;
-    font-family: "Segoe UI", sans-serif;
-}
-
-/* Sidebar fixat pentru desktop */
-.sidebar {
-    height: 100vh;
-    width: 240px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #2d3e50;
-    padding-top: 20px;
-    color: white;
-    transition: left 0.3s ease;
-}
-
-/* Stil pentru titluri și linkuri */
-.sidebar h2 {
-    font-size: 1.4rem;
-    text-align: center;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 30px;
-}
-
-.sidebar h2 span {
-    color: #00aaff;
-    font-weight: normal;
-}
-
-.sidebar a {
-    padding: 12px 20px;
-    text-decoration: none;
-    font-size: 1rem;
-    color: #ccc;
-    display: block;
-}
-
-.sidebar a:hover {
-    background-color: #1a252f;
-    color: #fff;
-}
-
-/* Dropdown menu */
-.sidebar .dropdown-menu {
-    background-color: #2d3e50;
-    border: none;
-    padding-left: 10px;
-}
-
-.sidebar .dropdown-item {
-    color: #ccc;
-}
-
-.sidebar .dropdown-item:hover {
-    color: #fff;
-    background-color: #1a252f;
-}
-
-/* Zona de conținut */
-.content {
-    margin-left: 240px;
-    padding: 20px;
-    transition: margin-left 0.3s ease;
-}
-
-/* Responsive pentru mobile */
-@media (max-width: 768px) {
-    /* Sidebar-ul va fi ascuns pe mobil */
-    .sidebar {
-        left: -240px; /* Ascunde complet sidebar-ul */
-        position: absolute;
-    }
-
-    /* Conținutul se pune mai pe stânga pe mobil */
-    .content {
-        margin-left: 0;
-    }
-
-    /* Butonul de meniu pentru mobil (hamburger) */
-    .sidebar-toggle {
-        display: block;
-        background-color: #2d3e50;
-        color: white;
-        padding: 10px;
-        font-size: 1.5rem;
-        cursor: pointer;
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        z-index: 1000;
-    }
-
-    /* Arată sidebar-ul când este activat */
-    .sidebar.show {
-        left: 0;
-    }
-
-    /* Ascunde linkurile și dropdown-urile pe mobil până când sidebar-ul e deschis */
-    .sidebar a, .sidebar .dropdown-item {
-        display: none;
-    }
-
-    /* Arată linkurile și dropdown-urile când sidebar-ul este deschis */
-    .sidebar.show a, .sidebar.show .dropdown-item {
-        display: block;
-    }
-}
-
-
-</style>
+<link rel="stylesheet" href="../css/nav.css">
 
 <!-- Butonul pentru a deschide sidebar-ul pe mobil -->
 <span class="sidebar-toggle">&#9776; Meniu</span>
@@ -138,6 +23,7 @@ body {
             <a href="<?= BASE_URL ?>tasks/tasks.php">Taskuri</a>
             <a href="<?= BASE_URL ?>logs/logs.php">Logs</a>
             <a href="<?= BASE_URL ?>adminF.php">DashBoard</a>
+            <a href="<?= BASE_URL ?>admin_index.php">IndexAdmin</a>
 
             <!-- Dropdown simplu pentru Administrare -->
             <div class="dropdown">

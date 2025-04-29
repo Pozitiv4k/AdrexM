@@ -52,7 +52,7 @@ $result = $conn->query("SELECT * FROM team");
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         // Obținem datele fiecărui membru
-                        $imagine = 'uploads/' . $row['imagine']; // Assume image is stored in 'uploads' folder
+                        $imagine = '../uploads/' . $row['imagine']; // Assume image is stored in 'uploads' folder
                         $nume_prenume = $row['nume_prenume'];
                         $functie = $row['functie'];
 
@@ -84,7 +84,6 @@ $result = $conn->query("SELECT * FROM team");
     <a href="#" class="btn btn-lg btn-secondary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
     <?php
-    include("../include/feedback.php");
     include("../include/footer.php");
     ?>
 
