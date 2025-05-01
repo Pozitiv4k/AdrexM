@@ -10,6 +10,7 @@ include("include/nav.php");
     <title>Pagină Principală</title>
        
     <link href="css/s.css" rel="stylesheet">
+    <link href="css/nav.css" rel="stylesheet">
 </head>
 <body>
     <div class="main-page-content">

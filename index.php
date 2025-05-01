@@ -10,9 +10,6 @@ if ($res) while ($r = $res->fetch_assoc()) $carousel[] = $r;
 $about = null; $res = $conn->query("SELECT * FROM about WHERE id=1");
 if ($res) $about = $res->fetch_assoc();
 
-$about_icons = []; $res = $conn->query("SELECT * FROM about_icons");
-if ($res) while ($r = $res->fetch_assoc()) $about_icons[] = $r;
-
 $services = []; $res = $conn->query("SELECT * FROM services");
 if ($res) while ($r = $res->fetch_assoc()) $services[] = $r;
 
@@ -75,8 +72,7 @@ if ($res) while ($r = $res->fetch_assoc()) $prices[] = $r;
               <?php if (!empty($slide['subtitle'])): ?>
                 <h1 class="display-1 text-white mb-md-4 animated zoomIn"><?= htmlspecialchars($slide['subtitle']) ?></h1>
               <?php endif; ?>
-              <a href="userside/leads.php" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Obține ofertă</a>
-              <a href="#" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contactează-ne</a>
+              <a href="userside/leads.php" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Obține oferta</a>
             </div>
           </div>
         </div>
@@ -94,18 +90,18 @@ if ($res) while ($r = $res->fetch_assoc()) $prices[] = $r;
 </div>
 <!-- Carousel End -->
 
-<!-- About Start -->
+<!-- Despre Start -->
 <?php if($about): ?>
 <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
   <div class="container">
     <div class="row gx-5">
       <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
         <div class="position-relative h-100">
-          <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.3s"
-               src="<?= htmlspecialchars($about['image_path']) ?>" style="object-fit: cover;">
+        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.3s"
+        src="<?= htmlspecialchars($about['image_path']) ?>" style="object-fit: contain; background-color: #0b0c2a;">
         </div>
       </div>
-      <div class="col-lg-7">
+      <div class="col-lg-4 col-md-6 wow zoomIn">
         <div class="mb-4">
           <h5 class="text-primary text-uppercase" style="letter-spacing: 5px;">Despre noi</h5>
           <h1 class="display-5 mb-0">Securitatea este în mâinile tale</h1>
@@ -127,9 +123,9 @@ if ($res) while ($r = $res->fetch_assoc()) $prices[] = $r;
   </div>
 </div>
 <?php endif; ?>
-<!-- About End -->
+<!-- Despre End -->
 
-<!-- Services Start -->
+<!-- Secțiunea servicii Start -->
 <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
   <div class="container">
     <div class="text-center mx-auto mb-5" style="max-width: 600px;">
@@ -138,14 +134,16 @@ if ($res) while ($r = $res->fetch_assoc()) $prices[] = $r;
     </div>
     <div class="row g-5">
       <?php foreach($services as $svc): ?>
-        <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
-          <div class="service-item bg-light border-bottom border-5 border-primary rounded">
-            <div class="position-relative p-5">
-             <i class="<?= isset($svc['icon']) ? htmlspecialchars($svc['icon']) : 'fa-question' ?> d-block display-1 fw-normal text-secondary mb-3"></i>
+        <div class="col-lg-4 col-md-6 wow zoomIn d-flex" data-wow-delay="0.3s">
+          <div class="service-item bg-light border-bottom border-5 border-primary rounded h-100 d-flex flex-column w-100">
+            <div class="position-relative p-5 flex-grow-1 d-flex flex-column">
+              <i class="<?= isset($svc['icon']) ? htmlspecialchars($svc['icon']) : 'fa-question' ?> d-block display-1 fw-normal text-secondary mb-3"></i>
               <h5 class="text-primary"><?= htmlspecialchars($svc['title']) ?></h5>
               <h3><?= htmlspecialchars($svc['subtitle'] ?? '') ?></h3>
-              <p><?= htmlspecialchars($svc['description']) ?></p>
-              <a href="#">Află mai mult<i class="bi bi-arrow-right ms-2"></i></a>
+              <p class="flex-grow-1"><?= htmlspecialchars($svc['description']) ?></p>
+              <a href="#" class="mt-3 text-decoration-none text-primary fw-semibold">
+                Află mai mult <i class="bi bi-arrow-right ms-2"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -153,9 +151,10 @@ if ($res) while ($r = $res->fetch_assoc()) $prices[] = $r;
     </div>
   </div>
 </div>
-<!-- Services End -->
+<!-- Secțiunea servicii End -->
 
-<!-- Pricing Plan Start -->
+
+<!-- Prețuri Start -->
 <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
   <div class="container">
     <div class="text-center mx-auto mb-5" style="max-width: 600px;">
@@ -164,8 +163,8 @@ if ($res) while ($r = $res->fetch_assoc()) $prices[] = $r;
     </div>
     <div class="row g-5">
       <?php foreach($prices as $pr): ?>
-        <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-          <div class="position-relative border border-primary rounded">
+        <div class="col-lg-4 wow slideInUp d-flex" data-wow-delay="0.3s">
+          <div class="position-relative border border-primary rounded w-100 d-flex flex-column">
             <div class="bg-primary text-center pt-5 pb-4">
               <h3 class="text-white"><?= htmlspecialchars($pr['item']) ?></h3>
               <h1 class="display-4 text-white">
@@ -173,22 +172,23 @@ if ($res) while ($r = $res->fetch_assoc()) $prices[] = $r;
                 <small class="align-bottom" style="font-size:22px;line-height:45px;">Leu</small>
               </h1>
             </div>
-            <div class="text-center py-5">
-            <?php foreach(explode("\n", $pr['features'] ?? '') as $feat): ?>
-  <?php if (trim($feat) !== ''): ?>
-    <p class="border-bottom border-light mb-2 pb-2"><?= htmlspecialchars($feat) ?></p>
-  <?php endif; ?>
-<?php endforeach; ?>
-
+            <div class="text-center py-5 flex-grow-1 d-flex flex-column justify-content-start">
+              <?php foreach(explode("\n", $pr['features'] ?? '') as $feat): ?>
+                <?php if (trim($feat) !== ''): ?>
+                  <p class="border-bottom border-light mb-2 pb-2"><?= htmlspecialchars($feat) ?></p>
+                <?php endif; ?>
+              <?php endforeach; ?>
             </div>
-            <a href="#" class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Comandă acum</a>
+            <div class="text-center pb-4">
+              <a href="#" class="btn btn-primary py-2 px-4">Comandă acum</a>
+            </div>
           </div>
         </div>
       <?php endforeach; ?>
     </div>
   </div>
 </div>
-<!-- Pricing Plan End -->
+<!-- Prețuri End -->
 
 <a href="#" class="btn btn-lg btn-secondary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 

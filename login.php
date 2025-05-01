@@ -1,7 +1,6 @@
 <?php
 require("db/db.php");
 include("include/auth.php");
-include("include/nav.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];

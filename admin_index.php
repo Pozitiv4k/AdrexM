@@ -126,11 +126,56 @@ if (isset($_GET['delete_price'])) {
     showMessage("Preț șters.");
 }
 
+
+// ===================TeAM=====================
+if (isset($_POST['add_team_member'])) {
+  $nume_prenume = $_POST['nume_prenume'];
+  $functie = $_POST['functie'];
+  $imagine = $_FILES['imagine']['name'];
+  $target_dir = "uploads/";
+  $target_file = $target_dir . basename($imagine);
+
+  if (isset($_POST['update_team'])) {
+    $nume_prenume = $_POST['nume_prenume'];
+    $functie = $_POST['functie'];
+    $imagine = $_POST['imagine']['name'];
+    $stmt->bind_param("sdsi", $nume_prenume, $functie, $imagine);
+    $stmt->execute();
+    showMessage("Team member actualizat.");
+}
+  // Creează folderul dacă nu există
+  if (!file_exists($target_dir)) {
+      mkdir($target_dir, 0777, true);
+  }
+
+  // Mută fișierul
+  if (move_uploaded_file($_FILES["imagine"]["tmp_name"], $target_file)) {
+      $sql = "INSERT INTO team (nume_prenume, functie, imagine) VALUES ('$nume_prenume', '$functie', '$imagine')";
+      if ($conn->query($sql)) {
+          echo "<p style='color:green;'>Membru adăugat cu succes!</p>";
+      } else {
+          echo "Eroare SQL: " . $conn->error;
+      }
+  } else {
+      echo "<p style='color:red;'>Eroare la încărcarea imaginii.</p>";
+  }
+}
+
+// Ștergere membru echipă
+if (isset($_GET['delete_team_member'])) {
+  $id = $_GET['delete_team_member'];
+  $conn->query("DELETE FROM team WHERE id = $id");
+}
 // --- FETCH ---
 $carousel = $conn->query("SELECT * FROM carousel")->fetch_all(MYSQLI_ASSOC);
 $about = $conn->query("SELECT * FROM about WHERE id = 1")->fetch_assoc();
 $services = $conn->query("SELECT * FROM services")->fetch_all(MYSQLI_ASSOC);
 $prices = $conn->query("SELECT * FROM price_list")->fetch_all(MYSQLI_ASSOC);
+$team_result = $conn->query("SELECT * FROM team");
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -226,7 +271,56 @@ $prices = $conn->query("SELECT * FROM price_list")->fetch_all(MYSQLI_ASSOC);
     </form>
   </li>
 <?php endforeach; ?>
+</ul><!-- Secțiune: Adăugare membru echipă -->
+<form method="POST" enctype="multipart/form-data">
+  <h2>👥 Adaugă Membru Echipa</h2>
+  <input type="text" name="nume_prenume" placeholder="Nume și Prenume" required>
+  <input type="text" name="functie" placeholder="Funcție" required>
+  <input type="file" name="imagine" accept="image/*" required>
+  <button name="add_team_member">Adaugă</button>
+</form>
+
+<!-- Listă Membri Echipă -->
+<ul>
+<?php while ($row = $team_result->fetch_assoc()): ?>
+  <li>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="team_id" value="<?= $row['id'] ?>">
+
+      <input type="text" name="nume_prenume" value="<?= htmlspecialchars($row['nume_prenume']) ?>" required>
+      <input type="text" name="functie" value="<?= htmlspecialchars($row['functie']) ?>" required>
+
+      <!-- Imagine curentă -->
+      <img src="uploads/<?= htmlspecialchars($row['imagine']) ?>" width="50" alt="Imagine curentă">
+
+      <!-- Schimbă imaginea -->
+      <input type="file" name="imagine" accept="image/*">
+
+      <button name="update_team_member">💾</button>
+      <a href="?delete_team_member=<?= $row['id'] ?>">🗑️</a>
+    </form>
+  </li>
+<?php endwhile; ?>
 </ul>
+
+<!-- Script: Prevenire dublă trimitere -->
+<script>
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+      if (form.dataset.submitted === 'true') {
+        e.preventDefault();
+      } else {
+        form.dataset.submitted = 'true';
+      }
+    });
+  });
+
+  // Prevenire resubmit la refresh
+  if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
+</script>
+
 
 </div>
 </body>

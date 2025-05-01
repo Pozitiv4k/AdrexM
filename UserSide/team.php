@@ -1,6 +1,6 @@
 <?php
 include ("../include/init.php");
-include("../db/dbF.php");
+include("../db/db.php");
 include("../include/nav_user.php");
 
 // Obținem toți membrii echipei din baza de date

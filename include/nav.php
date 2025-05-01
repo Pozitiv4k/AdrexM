@@ -22,8 +22,7 @@
             <a href="<?= BASE_URL ?>tasks/create_task.php">Creare Task</a>
             <a href="<?= BASE_URL ?>tasks/tasks.php">Taskuri</a>
             <a href="<?= BASE_URL ?>logs/logs.php">Logs</a>
-            <a href="<?= BASE_URL ?>adminF.php">DashBoard</a>
-            <a href="<?= BASE_URL ?>admin_index.php">IndexAdmin</a>
+            <a href="<?= BASE_URL ?>admin_index.php">DashBoard</a>
 
             <!-- Dropdown simplu pentru Administrare -->
             <div class="dropdown">
