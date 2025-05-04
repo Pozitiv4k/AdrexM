@@ -108,16 +108,6 @@ if ($res) while ($r = $res->fetch_assoc()) $prices[] = $r;
         </div>
         <h4 class="text-body fst-italic mb-4"><?= nl2br(htmlspecialchars($about['short_heading'] ?? '')) ?></h4>
         <p class="mb-4"><?= nl2br(htmlspecialchars($about['description'])) ?></p>
-        <div class="row g-3">
-          <?php foreach($about_icons as $icon): ?>
-            <div class="col-sm-6 wow zoomIn" data-wow-delay="0.6s">
-              <div class="bg-primary text-center text-white p-3 rounded border-bottom border-5 border-secondary" style="height: 200px;">
-                <i class="<?= htmlspecialchars($icon['icon_class']) ?> fa-4x mb-3"></i>
-                <h4><?= htmlspecialchars($icon['title']) ?></h4>
-              </div>
-            </div>
-          <?php endforeach; ?>
-        </div>
       </div>
     </div>
   </div>

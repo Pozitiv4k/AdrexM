@@ -22,9 +22,8 @@ $result = $conn->query("SELECT * FROM team");
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="../lib/animate/animate.min.css" rel="stylesheet">
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/chat.css" rel="stylesheet">
@@ -35,7 +34,7 @@ $result = $conn->query("SELECT * FROM team");
         <div class="row py-5">
             <div class="col-12 text-center">
                 <h1 class="display-1 text-white animated zoomIn">Echipa Adrex</h1>
-                <a href="index.php" class="h4 text-white">Acasa</a>
+                <a href="../index.php" class="h4 text-white">Acasa</a>
             </div>
         </div>
     </div>
@@ -89,12 +88,6 @@ $result = $conn->query("SELECT * FROM team");
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-    <script src="js/main.js"></script>
 </body>
 
 </html>
