@@ -14,6 +14,7 @@
 
     <?php if (isset($_SESSION['username'])): ?>
         <a href="<?= BASE_URL ?>configs/schimbap.php">Schimbă Parola</a>
+        <a href="<?= BASE_URL ?>users_clients/leads.php">Leads</a>
         <a href="<?= BASE_URL ?>depozit/management.php">Depozit</a>
         <a href="<?= BASE_URL ?>depozit/create_offer.php">Oferte</a>
         <a href="<?= BASE_URL ?>tasks/taskuri_utilizator.php">Instalare</a>
@@ -23,6 +24,7 @@
             <a href="<?= BASE_URL ?>tasks/tasks.php">Taskuri</a>
             <a href="<?= BASE_URL ?>logs/logs.php">Logs</a>
             <a href="<?= BASE_URL ?>admin_index.php">DashBoard</a>
+            
 
             <!-- Dropdown simplu pentru Administrare -->
             <div class="dropdown">

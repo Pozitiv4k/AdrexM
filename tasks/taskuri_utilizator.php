@@ -46,8 +46,9 @@ $tasks = $conn->query("SELECT t.*, c.login AS client_login FROM tasks t
     <form method="GET" style="margin-bottom: 20px;">
         <label for="status">Filtrează după status:</label>
         <select name="status" id="status" onchange="this.form.submit()">
+            <option value="">-- Toate --</option>
             <option value="programat" <?= $status === 'programat' ? 'selected' : '' ?>>Programat</option>
-            <option value="in lucru" <?= $status === 'in_lucru' ? 'selected' : '' ?>>În lucru</option>
+            <option value="in lucru" <?= $status === 'in lucru' ? 'selected' : '' ?>>În lucru</option>
             <option value="finalizat" <?= $status === 'finalizat' ? 'selected' : '' ?>>Finalizat</option>
         </select>
     </form>
