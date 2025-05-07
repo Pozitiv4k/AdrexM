@@ -1,0 +1,82 @@
+/* Stiluri personalizate */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.container {
+    margin-top: 40px;
+}
+
+h1, h3 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.table {
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 15px;
+}
+
+.table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.table td {
+    background-color: #f9f9f9;
+}
+
+.btn {
+    padding: 5px 10px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.table .fas {
+    margin-right: 5px;
+}
+
+/* Stiluri pentru butonul de reactivare */
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsivitate */
+@media (max-width: 768px) {
+    .table {
+        font-size: 0.9rem;
+    }
+}
