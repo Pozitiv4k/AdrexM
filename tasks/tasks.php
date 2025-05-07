@@ -3,7 +3,19 @@ include '../include/auth.php';
 include '../include/nav.php';
 
 $conn = new mysqli("localhost", "root", "", "examen");
-$tasks = $conn->query("SELECT t.*, c.login AS client_login FROM tasks t JOIN clients c ON t.client_id = c.id");
+
+// Obține filtrul selectat din query string sau implicit "toate"
+$filtru = $_GET['filtru'] ?? 'toate';
+
+$sql = "SELECT t.*, c.login AS client_login FROM tasks t 
+        JOIN clients c ON t.client_id = c.id";
+if ($filtru === "programat") {
+    $sql .= " WHERE t.status = 'programat'";
+} elseif ($filtru === "finalizat") {
+    $sql .= " WHERE t.status = 'Finalizat'";
+}
+
+$tasks = $conn->query($sql);
 
 // utilizatori pentru dropdown
 $users_res = $conn->query("SELECT username FROM users");
@@ -53,6 +65,16 @@ while ($u = $users_res->fetch_assoc()) {
 <body>
 <div class="main-page-content">
     <h2>Taskuri</h2>
+
+    <form method="get" style="margin-bottom: 15px;">
+        <label for="filtru">Filtrează după status:</label>
+        <select name="filtru" id="filtru" onchange="this.form.submit()">
+            <option value="toate" <?= $filtru === 'toate' ? 'selected' : '' ?>>Toate</option>
+            <option value="programat" <?= $filtru === 'programat' ? 'selected' : '' ?>>Programat</option>
+            <option value="finalizat" <?= $filtru === 'finalizat' ? 'selected' : '' ?>>Finalizat</option>
+        </select>
+    </form>
+
     <table>
         <tr>
             <th>Tip</th><th>Descriere</th><th>Adresă</th><th>Client</th><th>Status</th><th>Acțiuni</th>
@@ -65,8 +87,14 @@ while ($u = $users_res->fetch_assoc()) {
                 <td><?= htmlspecialchars($t['client_login']) ?></td>
                 <td><?= htmlspecialchars($t['status']) ?></td>
                 <td>
-                    <button onclick="deschidePopupProgramare(<?= $t['id'] ?>)">Programează</button>
-                    <button onclick="deschidePopupTransmitere(<?= $t['id'] ?>)">Transmite</button>
+                    <?php if ($t['status'] === 'De programat'): ?>
+                        <button onclick="deschidePopupProgramare(<?= $t['id'] ?>)">Programează</button>
+                    <?php endif; ?>
+                    
+                    <?php if ($t['status'] === 'programat'): ?>
+                        <button onclick="deschidePopupTransmitere(<?= $t['id'] ?>)">Transmite</button>
+                    <?php endif; ?>
+
                     <form method="POST" action="sterge_task.php" style="display:inline;" onsubmit="return confirm('Sigur?')">
                         <input type="hidden" name="task_id" value="<?= $t['id'] ?>">
                         <button name="action" value="sterge">Șterge</button>
@@ -77,7 +105,7 @@ while ($u = $users_res->fetch_assoc()) {
     </table>
 </div>
 
-<!-- Overlay comun -->
+<!-- Overlay -->
 <div class="overlay" id="overlay"></div>
 
 <!-- Popup programare -->
@@ -114,7 +142,6 @@ while ($u = $users_res->fetch_assoc()) {
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-    // Flatpickr pentru data programată
     flatpickr("#popup_data", {
         enableTime: true,
         dateFormat: "Y-m-d H:i",
@@ -172,3 +199,4 @@ while ($u = $users_res->fetch_assoc()) {
 </script>
 </body>
 </html>
+
