@@ -7,9 +7,9 @@
             <div class="col-lg-3 col-md-6">
                 <h3 class="text-white mb-4">Navigare Rapidă</h3>
                 <div class="d-flex flex-column justify-content-start">
-                    <a class="text-light mb-2" href="index.php"><i class="bi bi-arrow-right text-primary me-2"></i>Acasă</a>
-                    <a class="text-light mb-2" href="UserSide/about.php"><i class="bi bi-arrow-right text-primary me-2"></i>Despre Noi</a>
-                    <a class="text-light mb-2" href="UserSide/service.php"><i class="bi bi-arrow-right text-primary me-2"></i>Serviciile Noastre</a>
+                    <a class="text-light mb-2" href="<?= BASE_URL ?>index.php"><i class="bi bi-arrow-right text-primary me-2"></i>Acasă</a>
+                    <a class="text-light mb-2" href="<?= BASE_URL ?>UserSide/leads.php"><i class="bi bi-arrow-right text-primary me-2"></i>Ce v-ar interesa</a>
+                    <a class="text-light mb-2" href="<?= BASE_URL ?>UserSide/service.php"><i class="bi bi-arrow-right text-primary me-2"></i>Serviciile Noastre</a>
                     <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Termeni și Condiții</a>
                     <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Politica de Confidențialitate</a>
                 </div>
@@ -29,8 +29,8 @@
             <!-- Contact Information -->
             <div class="col-lg-3 col-md-6">
                 <h3 class="text-white mb-4">Contactează-ne</h3>
-                <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>Str. Exemplu 123, Chișinău, Moldova</p>
-                <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>suport@exemplu.md</p>
+                <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>Str. Petricani 123, Chișinău, Moldova</p>
+                <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>suport@adrex.md</p>
                 <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+373 123 456 78</p>
             </div>
 

@@ -17,9 +17,11 @@ $tehnician = $_SESSION['username'];
 $sql = "SELECT t.*, c.login AS client_login, c.id AS client_id
         FROM tasks t 
         JOIN clients c ON t.client_id = c.id
-        WHERE t.id = ? AND t.atribuit_la = ?";
+        WHERE t.id = ? AND (t.atribuit_la = ? OR t.tehnician = ?)";
+
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("is", $task_id, $tehnician);
+$stmt->bind_param("iss", $task_id, $tehnician, $tehnician);
+
 $stmt->execute();
 $result = $stmt->get_result();
 $task = $result->fetch_assoc();
@@ -30,7 +32,7 @@ if (!$task) {
 
 if ($task['status'] === 'neinceput') {
     $conn->query("UPDATE tasks SET status = 'in_lucru' WHERE id = $task_id");
-    $task['status'] = 'in_lucru';
+    $task['status'] = 'in_desfasurare';
 }
 
 $echipamente = $conn->query("SELECT id, tip_echipament, model_echipament, numar_serie, imagine, pret_piata FROM echipamente WHERE disponibil = 1");

@@ -4,20 +4,22 @@ include '../include/nav.php';
 
 $conn = new mysqli("localhost", "root", "", "examen");
 
-// Obține filtrul selectat din query string sau implicit "toate"
+// Filtru după status
 $filtru = $_GET['filtru'] ?? 'toate';
 
-$sql = "SELECT t.*, c.login AS client_login FROM tasks t 
+$sql = "SELECT t.*, c.login AS client_login, t.tehnician FROM tasks t 
         JOIN clients c ON t.client_id = c.id";
 if ($filtru === "programat") {
     $sql .= " WHERE t.status = 'programat'";
 } elseif ($filtru === "finalizat") {
-    $sql .= " WHERE t.status = 'Finalizat'";
+    $sql .= " WHERE t.status = 'finalizat'";
+} elseif ($filtru === "in_desfasurare") {
+    $sql .= " WHERE t.status = 'in_desfasurare'";
 }
 
 $tasks = $conn->query($sql);
 
-// utilizatori pentru dropdown
+// lista de utilizatori pentru dropdown
 $users_res = $conn->query("SELECT username FROM users");
 $users = [];
 while ($u = $users_res->fetch_assoc()) {
@@ -29,8 +31,7 @@ while ($u = $users_res->fetch_assoc()) {
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title>Admin - Taskuri</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskuri</title>
     <link href="../css/s.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
@@ -43,7 +44,6 @@ while ($u = $users_res->fetch_assoc()) {
             top: 0; left: 0;
             width: 100%; height: 100%;
             background: rgba(0,0,0,0.5);
-            z-index: 1000;
         }
         .popup {
             background: white;
@@ -67,37 +67,37 @@ while ($u = $users_res->fetch_assoc()) {
     <h2>Taskuri</h2>
 
     <form method="get" style="margin-bottom: 15px;">
-        <label for="filtru">Filtrează după status:</label>
+        <label for="filtru">Filtru status:</label>
         <select name="filtru" id="filtru" onchange="this.form.submit()">
             <option value="toate" <?= $filtru === 'toate' ? 'selected' : '' ?>>Toate</option>
             <option value="programat" <?= $filtru === 'programat' ? 'selected' : '' ?>>Programat</option>
             <option value="finalizat" <?= $filtru === 'finalizat' ? 'selected' : '' ?>>Finalizat</option>
+            <option value="in_desfasurare" <?= $filtru === 'in_desfasurare' ? 'selected' : '' ?>>În lucru</option>
         </select>
     </form>
 
     <table>
         <tr>
-            <th>Tip</th><th>Descriere</th><th>Adresă</th><th>Client</th><th>Status</th><th>Acțiuni</th>
+            <th>Tip</th><th>Descriere</th><th>Adresă</th><th>Client</th><th>Status</th><th>Tehnician</th><th>Acțiuni</th>
         </tr>
-        <?php while($t = $tasks->fetch_assoc()): ?>
+        <?php while ($t = $tasks->fetch_assoc()): ?>
             <tr>
                 <td><?= htmlspecialchars($t['tip']) ?></td>
                 <td><?= htmlspecialchars($t['descriere']) ?></td>
                 <td><?= htmlspecialchars($t['adresa']) ?></td>
                 <td><?= htmlspecialchars($t['client_login']) ?></td>
                 <td><?= htmlspecialchars($t['status']) ?></td>
+                <td><?= htmlspecialchars($t['tehnician'] ?: '-') ?></td>
                 <td>
                     <?php if ($t['status'] === 'De programat'): ?>
                         <button onclick="deschidePopupProgramare(<?= $t['id'] ?>)">Programează</button>
                     <?php endif; ?>
-                    
                     <?php if ($t['status'] === 'programat'): ?>
                         <button onclick="deschidePopupTransmitere(<?= $t['id'] ?>)">Transmite</button>
                     <?php endif; ?>
-
-                    <form method="POST" action="sterge_task.php" style="display:inline;" onsubmit="return confirm('Sigur?')">
+                    <form method="POST" action="sterge_task.php" style="display:inline;" onsubmit="return confirm('Ștergi taskul?')">
                         <input type="hidden" name="task_id" value="<?= $t['id'] ?>">
-                        <button name="action" value="sterge">Șterge</button>
+                        <button>Șterge</button>
                     </form>
                 </td>
             </tr>
@@ -110,7 +110,7 @@ while ($u = $users_res->fetch_assoc()) {
 
 <!-- Popup programare -->
 <div class="popup" id="popup_programare">
-    <h3>Programare Task</h3>
+    <h3>Programare</h3>
     <label>Tehnician:</label>
     <select id="popup_tehnician">
         <option value="">-- Selectează --</option>
@@ -118,7 +118,7 @@ while ($u = $users_res->fetch_assoc()) {
             <option value="<?= $u ?>"><?= $u ?></option>
         <?php endforeach; ?>
     </select>
-    <label>Data programată:</label>
+    <label>Data:</label>
     <input type="text" id="popup_data">
     <input type="hidden" id="popup_task_id">
     <button onclick="confirmProgramare()">Confirmă</button>
@@ -127,7 +127,7 @@ while ($u = $users_res->fetch_assoc()) {
 
 <!-- Popup transmitere -->
 <div class="popup" id="popup_transmitere">
-    <h3>Transmite Task</h3>
+    <h3>Transmitere</h3>
     <label>Tehnician:</label>
     <select id="dropdown_tehnician">
         <option value="">-- Selectează --</option>
@@ -178,15 +178,16 @@ while ($u = $users_res->fetch_assoc()) {
         fetch('programare_task.php', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: `task_id=${taskId}&tehnician=${encodeURIComponent(tehnician)}&data_programata=${encodeURIComponent(data)}&submit_programare=1`
+            body: `task_id=${taskId}&tehnician=${encodeURIComponent(tehnician)}&data_programata=${encodeURIComponent(data)}`
         }).then(() => location.reload());
     }
 
     function confirmTransmitere() {
         const taskId = document.getElementById("task_id_transmitere").value;
         const user = document.getElementById("dropdown_tehnician").value;
+
         if (!user) {
-            alert("Selectează un tehnician.");
+            alert("Selectează un tehnician!");
             return;
         }
 
@@ -199,4 +200,3 @@ while ($u = $users_res->fetch_assoc()) {
 </script>
 </body>
 </html>
-

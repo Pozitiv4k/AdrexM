@@ -9,7 +9,7 @@ include("../db/db.php");
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title>Creare Ofertă Dinamică</title>
+    <title>Creare Ofertă </title>
     <link href="../css/s.css" rel="stylesheet">
     <style>
         body { font-family: Calibri, sans-serif; padding: 30px; }
@@ -57,7 +57,6 @@ include("../db/db.php");
     <button type="button" class="add-row-btn" onclick="addAutoRow()">Adaugă din depozit</button>
     <button type="button" class="manual-row-btn" onclick="addManualRow()">Adaugă manual</button>
     <br><br>
-    <button type="submit" name="export" value="excel">Generează Ofertă Excel</button>
     <button type="submit" name="export" value="pdf">Generează Ofertă PDF</button>
 </form>
 </div>
@@ -88,6 +87,10 @@ function addAutoRow() {
         <td><button type="button" class="remove-btn" onclick="removeRow(this)">Șterge</button></td>
     `;
     document.getElementById("offerBody").appendChild(row);
+
+  
+
+
 }
 
 function addManualRow() {

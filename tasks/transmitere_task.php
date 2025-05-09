@@ -1,12 +1,17 @@
 <?php
-include '../include/auth.php';
+$conn = new mysqli("localhost", "root", "", "examen");
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $conn = new mysqli("localhost", "root", "", "examen");
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $task_id = $_POST['task_id'] ?? null;
+    $tehnician = $_POST['tehnician'] ?? null;
 
-    $task_id = intval($_POST['task_id']);
-    $tehnician = $conn->real_escape_string($_POST['tehnician']);
+    if ($task_id && $tehnician) {
+        $stmt = $conn->prepare("UPDATE tasks SET status = 'in_desfasurare', tehnician = ? WHERE id = ?");
+        $stmt->bind_param("si", $tehnician, $task_id);
+        $stmt->execute();
+        $stmt->close();
 
-    $conn->query("UPDATE tasks SET atribuit_la = '$tehnician', status = 'atribuit' WHERE id = $task_id");
+        // Redirect sau altceva
+    }
 }
 ?>

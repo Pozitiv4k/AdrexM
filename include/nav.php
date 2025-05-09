@@ -17,11 +17,19 @@
         <a href="<?= BASE_URL ?>users_clients/leads.php">Leads</a>
         <a href="<?= BASE_URL ?>depozit/management.php">Depozit</a>
         <a href="<?= BASE_URL ?>depozit/create_offer.php">Oferte</a>
-        <a href="<?= BASE_URL ?>tasks/taskuri_utilizator.php">Instalare</a>
-
+        <div class="dropdown">
+                <a class="dropdown-toggle" href="#" role="button" id="adminDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Taskuri
+                </a>
+                <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                <a href="<?= BASE_URL ?>tasks/taskuri_utilizator.php">Taskurile mele </a>
+                    <?php if (isset($_SESSION['is_superuser']) && $_SESSION['is_superuser'] == 1): ?>
+                        <a href="<?= BASE_URL ?>tasks/create_task.php">Creare Task</a>
+                        <a href="<?= BASE_URL ?>tasks/tasks.php">Taskuri</a>
+                    <?php endif; ?>
+                </div>
+            </div>
         <?php if (isset($_SESSION['is_superuser']) && $_SESSION['is_superuser'] == 1): ?>
-            <a href="<?= BASE_URL ?>tasks/create_task.php">Creare Task</a>
-            <a href="<?= BASE_URL ?>tasks/tasks.php">Taskuri</a>
             <a href="<?= BASE_URL ?>logs/logs.php">Logs</a>
             <a href="<?= BASE_URL ?>admin_index.php">DashBoard</a>
             
