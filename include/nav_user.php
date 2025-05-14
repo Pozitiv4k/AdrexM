@@ -15,8 +15,8 @@ include_once __DIR__ . '/../configs/config.php';
             <a href="<?= BASE_URL ?>UserSide/price.php" class="nav-item nav-link">Price List</a>
             <a href="<?= BASE_URL ?>UserSide/team.php" class="nav-item nav-link">Echipa noastra</a>
             <a href="<?= BASE_URL ?>UserSide/leads.php" class="nav-item nav-link">Ce v-ar interesa</a>
-            <a href="https://www.adrex.md" class="nav-item nav-link nav-contact bg-secondary text-white px-5 ms-lg-5">
-                <i class="bi bi bi-globe2 me-2"></i>www.adrex.md
+            <a href="<?= BASE_URL ?>UserSide/leads.php" class="nav-item nav-link nav-contact bg-secondary text-white px-5 ms-lg-5">
+                <i class="bi bi bi-globe2 me-2"></i>Scrie-ne un mesaj
             </a>
         </div>
     </div>
