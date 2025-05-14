@@ -1,5 +1,4 @@
 <?php
-include ("../include/init.php");
 include("../include/nav_user.php");
 include("../db/db.php"); // fișier cu conexiunea la DB
 $prices = []; $res = $conn->query("SELECT * FROM price_list");

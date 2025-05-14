@@ -1,5 +1,4 @@
 <?php 
-include ("../include/init.php"); 
 include("../db/db.php"); // fișier cu conexiunea la DB
                 if (isset($_POST['submit_lead'])) {
                     $nume = mysqli_real_escape_string($conn, $_POST['nume']);

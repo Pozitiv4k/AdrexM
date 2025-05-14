@@ -1,5 +1,4 @@
 <?php
-include ("../include/init.php");
 include("../db/db.php");
 include("../include/nav_user.php");
 

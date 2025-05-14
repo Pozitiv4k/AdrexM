@@ -14,7 +14,7 @@ $sessionLifetime = 1800;
 if (time() - $_SESSION['login_time'] > $sessionLifetime) {
     session_unset();
     session_destroy();
-    header("Location: /login.php?expired=1"); // Poți afișa un mesaj în login.php
+    header("Location: /adrexm/login.php?expired=1"); // Poți afișa un mesaj în login.php
     exit();
 }
 
